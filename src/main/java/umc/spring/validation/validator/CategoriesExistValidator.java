@@ -1,18 +1,39 @@
-/*
 package umc.spring.validation.validator;
 
-import jakarta.validation.Constraint;
-import jakarta.validation.Payload;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
+import umc.spring.apiPayload.code.status.ErrorStatus;
+import umc.spring.repository.FoodCategoryRepository;
+import umc.spring.validation.annotation.ExistCategories;
 
-import java.lang.annotation.*;
+import java.util.List;
 
-@Documented
-@Constraint(validatedBy = CategoriesExistValidator.class)
-@Target( { ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER })
-@Retention(RetentionPolicy.RUNTIME)
-public @interface ExistCategories {
+@Component
+@RequiredArgsConstructor
+public class CategoriesExistValidator implements ConstraintValidator<ExistCategories, List<Long>> {
 
-    String message() default "해당하는 카테고리가 존재하지 않습니다.";
-    Class<?>[] groups() default {};
-    Class<? extends Payload>[] payload() default {};
-}*/
+    private final FoodCategoryRepository foodCategoryRepository;
+
+    @Override
+    public void initialize(ExistCategories constraintAnnotation) {
+        ConstraintValidator.super.initialize(constraintAnnotation);
+    }
+
+    // false 일 경우 ConstrainViolationException
+    // -> @Valid(MethodArgumentNotValidException)
+    @Override
+    public boolean isValid(List<Long> values, ConstraintValidatorContext context) {
+        boolean isValid = values.stream()
+                .allMatch(value -> foodCategoryRepository.existsById(value));
+
+        if (!isValid) {
+            context.disableDefaultConstraintViolation();
+            context.buildConstraintViolationWithTemplate(ErrorStatus.FOOD_CATEGORY_NOT_FOUND.toString()).addConstraintViolation();
+        }
+
+        return isValid;
+    }
+
+}
