@@ -21,7 +21,7 @@ public class MemberConverter {
 
         Gender gender = null;
 
-        switch (request.getGender()){
+        switch (request.getGender()){ 
             case 1:
                 gender = Gender.MALE;
                 break;
