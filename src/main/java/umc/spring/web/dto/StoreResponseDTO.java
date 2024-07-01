@@ -26,6 +26,18 @@ public class StoreResponseDTO {
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
+    public static class CreateMissionResultDTO {
+
+        Long missionId;
+        LocalDateTime createdAt;
+
+    }
+
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class ReviewPreViewListDTO{
         List<ReviewPreViewDTO> reviewList;
         Integer listSize;

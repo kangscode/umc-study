@@ -13,6 +13,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import umc.spring.apiPayload.ApiResponse;
 import umc.spring.converter.StoreConverter;
+import umc.spring.domain.Mission;
 import umc.spring.domain.Review;
 import umc.spring.service.StoreService.StoreCommandService;
 import umc.spring.service.StoreService.StoreQueryService;
@@ -39,6 +40,17 @@ public class StoreRestController {
         return ApiResponse.onSuccess(StoreConverter.toCreateReviewResultDTO(review));
 
     }
+
+    @PostMapping("/{storeId}/missions")
+    public ApiResponse<StoreResponseDTO.CreateMissionResultDTO> createMission(
+            @RequestBody @Valid StoreRequestDTO.MissionDTO request,
+            @ExistStore @PathVariable(name = "storeId") Long storeId
+    ) {
+        Mission mission = storeCommandService.createMission(storeId, request);
+        return ApiResponse.onSuccess(StoreConverter.toCreateMissionResultDTO(mission));
+
+    }
+
 
     @GetMapping("/{storeId}/reviews")
     @Operation(summary = "특정 가게의 리뷰 목록 조회 API",description = "특정 가게의 리뷰들의 목록을 조회하는 API이며, 페이징을 포함합니다. query String 으로 page 번호를 주세요")
