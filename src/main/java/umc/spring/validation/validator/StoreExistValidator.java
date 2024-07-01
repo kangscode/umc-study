@@ -1,14 +1,15 @@
 package umc.spring.validation.validator;
 
-import jakarta.validation.ConstraintValidator;
-import jakarta.validation.ConstraintValidatorContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import umc.spring.apiPayload.code.status.ErrorStatus;
 import umc.spring.domain.Store;
+import umc.spring.service.StoreService.StoreCommandService;
 import umc.spring.service.StoreService.StoreQueryService;
 import umc.spring.validation.annotation.ExistStore;
 
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 import java.util.Optional;
 
 @Component

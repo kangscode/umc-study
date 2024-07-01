@@ -1,7 +1,5 @@
 package umc.spring.apiPayload.exception;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -18,6 +16,8 @@ import umc.spring.apiPayload.ApiResponse;
 import umc.spring.apiPayload.code.ErrorReasonDTO;
 import umc.spring.apiPayload.code.status.ErrorStatus;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.ConstraintViolationException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -56,7 +56,7 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
 
     @org.springframework.web.bind.annotation.ExceptionHandler
     public ResponseEntity<Object> exception(Exception e, WebRequest request) {
-        e.printStackTrace();
+//        e.printStackTrace();
 
         return handleExceptionInternalFalse(e, ErrorStatus._INTERNAL_SERVER_ERROR, HttpHeaders.EMPTY, ErrorStatus._INTERNAL_SERVER_ERROR.getHttpStatus(),request, e.getMessage());
     }

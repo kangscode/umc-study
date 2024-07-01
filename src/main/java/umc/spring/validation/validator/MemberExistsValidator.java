@@ -1,7 +1,5 @@
 package umc.spring.validation.validator;
 
-import jakarta.validation.ConstraintValidator;
-import jakarta.validation.ConstraintValidatorContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import umc.spring.apiPayload.code.status.ErrorStatus;
@@ -9,6 +7,8 @@ import umc.spring.domain.Member;
 import umc.spring.service.MemberService.MemberQueryService;
 import umc.spring.validation.annotation.ExistMember;
 
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 import java.util.Optional;
 
 @Component
@@ -33,5 +33,4 @@ public class MemberExistsValidator implements ConstraintValidator<ExistMember, L
         }
         return true;
     }
-
 }
