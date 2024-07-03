@@ -4,8 +4,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import umc.spring.converter.StoreConverter;
+import umc.spring.domain.Member;
 import umc.spring.domain.Mission;
 import umc.spring.domain.Review;
+import umc.spring.domain.Store;
+import umc.spring.domain.enums.MissionStatus;
+import umc.spring.domain.mapping.MemberMission;
 import umc.spring.repository.MemberRepository;
 import umc.spring.repository.MissionRepository;
 import umc.spring.repository.ReviewRepository;
@@ -45,7 +49,24 @@ public class StoreCommandServiceImpl implements StoreCommandService {
 
         return missionRepository.save(mission);
 
-
-
     }
+
+    @Override
+    public MemberMission addMission(Long missionId, Long memberId) {
+
+        Member member = memberRepository.findById(memberId).get();
+        Mission mission = missionRepository.findById(missionId).get();
+
+        MemberMission memberMission = MemberMission.builder()
+                .status(MissionStatus.CHALLENGING)
+                .build();
+
+        memberMission.setMember(member);
+        memberMission.setMission(mission);
+
+        return memberMission;
+    }
+
+
+
 }

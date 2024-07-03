@@ -15,6 +15,7 @@ import umc.spring.apiPayload.ApiResponse;
 import umc.spring.converter.StoreConverter;
 import umc.spring.domain.Mission;
 import umc.spring.domain.Review;
+import umc.spring.domain.mapping.MemberMission;
 import umc.spring.service.StoreService.StoreCommandService;
 import umc.spring.service.StoreService.StoreQueryService;
 import umc.spring.validation.annotation.ExistMember;
@@ -48,6 +49,16 @@ public class StoreRestController {
     ) {
         Mission mission = storeCommandService.createMission(storeId, request);
         return ApiResponse.onSuccess(StoreConverter.toCreateMissionResultDTO(mission));
+
+    }
+
+    @PostMapping("/missions/{missionId}")
+    public ApiResponse<StoreResponseDTO.addMissionResultDTO> addMission(
+            @PathVariable(name = "missionId") Long missionId,
+            @ExistMember @RequestParam(name = "memberId") Long memberId
+    ) {
+        MemberMission memberMission = storeCommandService.addMission(missionId, memberId);
+        return ApiResponse.onSuccess(StoreConverter.toAddMissionResultDTO(memberMission));
 
     }
 

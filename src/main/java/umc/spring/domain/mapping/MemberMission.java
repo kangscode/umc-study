@@ -20,7 +20,7 @@ public class MemberMission extends BaseEntity {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    @Column(columnDefinition = "VARCHAR(15) DEFAULT 'CHALLENGING'")
+    @Column(columnDefinition = "VARCHAR(15) DEFAULT 'NOCHALLENGING'")
     private MissionStatus status;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -36,6 +36,13 @@ public class MemberMission extends BaseEntity {
             member.getMemberMissionList().remove(this);
         this.member = member;
         member.getMemberMissionList().add(this);
+    }
+
+    public void setMission(Mission mission){
+        if(this.mission != null)
+            mission.getMemberMissionList().remove(this);
+        this.mission = mission;
+        mission.getMemberMissionList().add(this);
     }
 
 
