@@ -43,12 +43,6 @@ public class StoreConverter {
                 .build();
     }
 
-    public static StoreResponseDTO.addMissionResultDTO toAddMissionResultDTO(MemberMission memberMissionmission) {
-        return StoreResponseDTO.addMissionResultDTO.builder()
-                .memberMissionId(memberMissionmission.getId())
-                .createdAt(LocalDateTime.now())
-                .build();
-    }
 
     public static StoreResponseDTO.ReviewPreViewDTO reviewPreViewDTO(Review review){
         return StoreResponseDTO.ReviewPreViewDTO.builder()

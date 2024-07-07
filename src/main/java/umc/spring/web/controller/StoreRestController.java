@@ -52,16 +52,6 @@ public class StoreRestController {
 
     }
 
-    @PostMapping("/missions/{missionId}")
-    public ApiResponse<StoreResponseDTO.addMissionResultDTO> addMission(
-            @PathVariable(name = "missionId") Long missionId,
-            @ExistMember @RequestParam(name = "memberId") Long memberId
-    ) {
-        MemberMission memberMission = storeCommandService.addMission(missionId, memberId);
-        return ApiResponse.onSuccess(StoreConverter.toAddMissionResultDTO(memberMission));
-
-    }
-
 
     @GetMapping("/{storeId}/reviews")
     @Operation(summary = "특정 가게의 리뷰 목록 조회 API",description = "특정 가게의 리뷰들의 목록을 조회하는 API이며, 페이징을 포함합니다. query String 으로 page 번호를 주세요")

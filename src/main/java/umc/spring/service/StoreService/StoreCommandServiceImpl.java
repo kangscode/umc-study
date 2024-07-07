@@ -51,22 +51,5 @@ public class StoreCommandServiceImpl implements StoreCommandService {
 
     }
 
-    @Override
-    public MemberMission addMission(Long missionId, Long memberId) {
-
-        Member member = memberRepository.findById(memberId).get();
-        Mission mission = missionRepository.findById(missionId).get();
-
-        MemberMission memberMission = MemberMission.builder()
-                .status(MissionStatus.CHALLENGING)
-                .build();
-
-        memberMission.setMember(member);
-        memberMission.setMission(mission);
-
-        return memberMission;
-    }
-
-
 
 }

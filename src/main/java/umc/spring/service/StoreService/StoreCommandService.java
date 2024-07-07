@@ -14,5 +14,4 @@ public interface StoreCommandService {
 
     Mission createMission(Long storeId, StoreRequestDTO.MissionDTO request);
 
-    MemberMission addMission(Long missionId, Long memberId);
 }
