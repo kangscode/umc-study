@@ -3,6 +3,7 @@ package umc.spring.web.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
+import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
@@ -26,7 +27,7 @@ public class StoreRequestDTO {
     @Getter
     public static class MissionDTO {
 
-        @NotNull
+        @Range(max = 10000, min = 0)
         Integer reward;
 
         @DateTimeFormat(pattern = "yyyy-mm-dd")
